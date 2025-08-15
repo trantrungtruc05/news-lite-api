@@ -1,13 +1,12 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, Text, DateTime
 from app.db.base import Base
 
 
-class Category(Base):
-    __tablename__ = "category"
+class NewsContent(Base):
+    __tablename__ = "news_content"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=False)
-    link = Column(String, nullable=False)
+    content = Column(Text, nullable=False)
     category_id = Column(String, nullable=True)
-    source = Column(String, nullable=False)
+    title = Column(String, nullable=True)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)

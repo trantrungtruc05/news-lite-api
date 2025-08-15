@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup
 
 def summarize_with_ollama(
     text: str,
-    model: str = "llama3.1:8b",
-    base_url: str = "http://localhost:11434",
+    model: str = "llama3.1:latest",
+    base_url: str = "http://192.168.1.8:11434",
     length: str = "medium",
     language: str = "Tiếng Việt",
     temperature: float = 0.2,
@@ -66,7 +66,7 @@ def build_prompt(text: str, length: str, language: str) -> str:
     )
 
 def get_url_to_summary(url: str) -> str:
-    print(f"Bắt đầu chạy vào lúc {datetime.datetime.now()}")
+    # print(f"Bắt đầu chạy vào lúc {datetime.datetime.now()}")
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -81,6 +81,6 @@ def get_url_to_summary(url: str) -> str:
 
     print(f"Tiêu đề: {title} - link: {url}")
     summary = summarize_with_ollama(content)
-    print(f"Kết quả: {summary}")
+    # print(f"Kết quả: {summary}")
 
-    print(f"Kết thúc chạy vào lúc {datetime.datetime.now()}")
+    # print(f"Kết thúc chạy vào lúc {datetime.datetime.now()}")

@@ -1,19 +1,18 @@
 from datetime import datetime
 from pydantic import BaseModel
 
-class CategoryIn(BaseModel):
-    name: str
-    link: str
+class NewsContentIn(BaseModel):
+    content: str
     category_id: str
-    source: str
+    title: str
     created_at: datetime
     updated_at: datetime
 
-class CategoryOut(BaseModel):
+
+class NewsContentOut(BaseModel):
     id: int
-    name: str
-    link: str
+    content: str
     category_id: str
-    source: str
+    title: str
     created_at: datetime
     updated_at: datetime
