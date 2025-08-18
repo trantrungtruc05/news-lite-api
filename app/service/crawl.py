@@ -6,6 +6,8 @@ import datetime
 from sqlalchemy.orm import Session
 from app.schema.news_content import NewsContentIn
 from app.repo import news_content
+from app.service.summary import summary_content
+
 
 
 
@@ -34,12 +36,11 @@ def crawl_content_to_db(db: Session):
             for p_tag in p_tags:
                 full_content += p_tag.get_text() + " "
 
-
-            newsContentCreate = NewsContentIn(content=full_content, category_id=cat.category_id, title=title, created_at=datetime.datetime.now(), updated_at=datetime.datetime.now())
-            news_content.create_news_content(db, newsContentCreate)
-            print("--------------------------------")    
-            print(f""" Link: {href} """)
-            print("--------------------------------")
+            if news_content.get_news_content_by_href(db, href) is None:
+                newsContentCreate = NewsContentIn(content=full_content, category_id=str(cat.id), title=title, href=href, summary_content=summary_content(full_content), created_at=datetime.datetime.now(), updated_at=datetime.datetime.now())
+                news_content.create_news_content(db, newsContentCreate)
+            else:
+                print("News content already exists")
 
 
 def crawl_category_to_db(db: Session):
